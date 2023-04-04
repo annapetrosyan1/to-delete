@@ -14,20 +14,21 @@ const knexConnection = knex({
   pool: { min: 2, max: 10 },
 });
 
-module.exports = {
-  userListQuery: () =>
-    knexConnection
-      .from("users")
-      .select("id", "email")
-      .then((rows) => {
-        let userList = [];
-        for (let row of rows) {
-          userList.push({ id: row.id, email: row.email });
-        }
-        return userList;
-      }),
-  userQuery: (email) =>
-    knexConnection.from("users").select("id", "email").where("email", email),
-};
+
+export const connection =  knexConnection;
+export const userListQuery =  () =>
+knexConnection
+  .from("users")
+  .select("id", "email")
+  .then((rows) => {
+    let userList = [];
+    for (let row of rows) {
+      userList.push({ id: row.id, email: row.email });
+    }
+    return userList;
+  });
+
+export const userQuery =  (email) =>
+  knexConnection.from("users").select("id", "email").where("email", email);
 
 //knex.insert({ telegram_id: 'tgId' }).into('users');

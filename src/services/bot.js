@@ -1,7 +1,9 @@
 require("dotenv").config();
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
-import { userQuery } from "../db/knex";
+import { connection, userQuery } from "../db/knex";
+
+
 
 export const botFactory = () => {
   const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -20,9 +22,8 @@ export const botFactory = () => {
     console.log(matchedUsers);
     try {
       if (matchedUsers?.length > 0) {
-        //пуш tgId в бд
-
         await ctx.reply("Теперь вы будете получать уведомления о событиях");
+        await connection.from('users').update('telegram_id', (await ctx.getChat()).id).where('email', emailFromTg);
       } else {
         await ctx.reply("Пользователь с таким email не найден");
       }
