@@ -46,7 +46,7 @@ const DELAY_TIMER = 15 * 1000;
 export const registerNotificationHandler = (next) => {
     return async () => {
         try {
-            const notifications = await connection.from("notifications").select('*').where('finishedat', null);
+            const notifications = await connection.from("notifications").select('*').where('finished_at', null);
     
             for (let notification of notifications) {
                 if (notification.notification_type in notificationTypes) {
@@ -67,7 +67,7 @@ export const registerNotificationHandler = (next) => {
                     }
                 }
                 
-                await connection.from("notifications").update('finishedat', new Date()).where('id', notification.id);
+                await connection.from("notifications").update('finished_at', new Date()).where('id', notification.id);
             }
         } catch (e) {
             console.log(e);

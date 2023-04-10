@@ -31,4 +31,3 @@ knexConnection
 export const userQuery =  (email) =>
   knexConnection.from("users").select("id", "email").where("email", email);
 
-//knex.insert({ telegram_id: 'tgId' }).into('users');
