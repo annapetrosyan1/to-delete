@@ -1,6 +1,7 @@
 /**
  * @typedef  AcceptTaskNotificationParams
  * 
+ * 
  * @prop {string} task_id
  * @prop {string} user_id
  * @prop {string} new_status
@@ -11,12 +12,20 @@
  * @returns
  */
 export const handleNotificationTelegram = (notification) => {
-    return `Update for task ${notification.task_id} user ${notification.task_id}: ${notification.new_status} to telegram.`;
+    let result = '';
+    if (notification.new_status === 'ready') 
+        result = 'принято'
+    else result = 'на доработке';
+    return `Задание ${notification.task_id} проверено.\nСтатус задания: ${result} `;
 }
 /**
  * @param {AcceptTaskNotificationParams} notification
  * @returns
  */
 export const handleNotificationEmail = (notification) => {
-    return `Update for task ${notification.task_id} user ${notification.task_id}: ${notification.new_status} to email.`;
+    let result = '';
+    if (notification.new_status === 'ready') 
+        result = 'принято'
+    else result = 'на доработке';
+    return `Задание ${notification.task_id} проверено.\nСтатус задания: ${result} `;
 }

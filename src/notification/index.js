@@ -4,8 +4,8 @@
  * @prop {string} id
  * @prop {string} notification_type
  * @prop {any} params
- * @prop {number} createdat
- * @prop {number} finishedat
+ * @prop {number} created_at
+ * @prop {number} finished_at
  */
 
 import { handleNotificationEmail as accept_task_admin_handleNotificationEmail, handleNotificationTelegram as accept_task_admin_handleNotificationTelegram } from './accept_task_admin';
